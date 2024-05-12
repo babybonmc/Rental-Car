@@ -84,5 +84,6 @@ function calculateRentalPrice(
     return isHighSeason ? "High" : "Low";
   }
   
-  module.exports = { calculateRentalPrice }; 
+  module.exports = { calculateRentalPrice, getCarClass, getRentalDays, getRentalSeason };
+
   
