@@ -1,3 +1,4 @@
+//100% coverage
 const { calculateRentalPrice, getCarClass, getRentalDays, getRentalSeason } = require('./rentalPrice');
 const assert = require('assert');
 
