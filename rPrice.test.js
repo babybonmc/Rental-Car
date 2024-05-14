@@ -1,7 +1,7 @@
 const { calculateRentalPrice, getCarClass, getRentalDays, getRentalSeason } = require('./rentalPrice');
 
 describe('Weekday and Weekend Rental Prices', () => {
-  // Тест для проверки, что цена увеличивается на 5% в выходные дни
+  // Test to check that the price increases by 5% on weekends
   it('should increase price by 5% on weekends', () => {
     const pickupDate = new Date(2024, 4, 10); // May 10, 2024 (Friday)
     const dropoffDate = new Date(2024, 4, 13); // May 13, 2024 (Monday)
@@ -82,6 +82,5 @@ it('should maintain weekday price during holiday season', () => {
       const expectedPrice = '$' + (basePriceBeforeWeekendSurcharge * 1.05).toFixed(2);
       expect(rentalPrice).toEqual(expectedPrice);
     });
-  }); 
-  
+  });   
 });
