@@ -1,6 +1,5 @@
 const { calculateRentalPrice, getCarClass, getRentalDays, getRentalSeason } = require('./rentalPrice');
 
-// Тесты для различия цен в будние и выходные дни
 describe('Weekday and Weekend Rental Prices', () => {
   // Тест для проверки, что цена увеличивается на 5% в выходные дни
   it('should increase price by 5% on weekends', () => {
@@ -24,7 +23,7 @@ describe('Weekday and Weekend Rental Prices', () => {
     expect(rentalPrice).toEqual(expectedPrice);
   });
   
-  // Тест для проверки, что цена остается на уровне будничной цены в период праздников
+  // Test to check that the price remains at the level of the weekday price during the holidays
 it('should maintain weekday price during holiday season', () => {
     const pickupDate = new Date(2024, 0, 1); // January 1, 2024 (New Year's Day, Wednesday)
     const dropoffDate = new Date(2024, 0, 4); // January 4, 2024 (Saturday)
@@ -43,7 +42,7 @@ it('should maintain weekday price during holiday season', () => {
     expect(rentalPrice).toEqual(expectedPrice);
   });
   
-  // Тест для проверки, что наценка на выходные дни не применяется в низкий сезон
+  // Test to check that weekend surcharge does not apply during low season
   it('should not increase price on weekends during low season', () => {
     const pickupDate = new Date(2024, 1, 1); // February 1, 2024 (Friday)
     const dropoffDate = new Date(2024, 1, 4); // February 4, 2024 (Monday)
@@ -62,7 +61,7 @@ it('should maintain weekday price during holiday season', () => {
     expect(rentalPrice).toEqual(expectedPrice);
   });
   
-  // Тест для проверки, что наценка на выходные дни применяется корректно для разных классов автомобилей
+  // Test to verify that the weekend surcharge is applied correctly for different car classes
   it('should apply weekend surcharge correctly for different car classes', () => {
     const pickupDate = new Date(2024, 4, 10); // May 10, 2024 (Friday)
     const dropoffDate = new Date(2024, 4, 13); // May 13, 2024 (Monday)
