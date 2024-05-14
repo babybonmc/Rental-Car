@@ -88,19 +88,21 @@ it('should maintain weekday price during holiday season', () => {
   // Тест для проверки поведения функции при крайних случаях
   it('should handle edge cases correctly', () => {
     // Test when rental duration is exactly one weekend
-    let pickupDate = new Date(2024, 4, 10); // May 10, 2024 (Friday)
-    let dropoffDate = new Date(2024, 4, 13); // May 13, 2024 (Monday)
-    let rentalSeason = getRentalSeason(pickupDate, dropoffDate);
-    let rentalDays = getRentalDays(pickupDate, dropoffDate);
-    let rentalPrice = calculateRentalPrice(
-      '1990-01-01', // Sample licenseIssueDate
-      '1995-01-01', // Sample licenseExpiryDate
-      30, // Sample driverAge
-      rentalDays,
-      rentalSeason,
-      'Compact', // Sample carClass
-      pickupDate // Pass pickupDate to calculateRentalPrice
-    );
+    // Test when rental duration is exactly one weekend
+let pickupDate = new Date(2024, 4, 10); // May 10, 2024 (Friday)
+let dropoffDate = new Date(2024, 4, 13); // May 13, 2024 (Monday)
+let rentalSeason = getRentalSeason(pickupDate, dropoffDate);
+let rentalDays = getRentalDays(pickupDate, dropoffDate);
+let rentalPrice = calculateRentalPrice(
+  '1990-01-01', // Sample licenseIssueDate
+  '1995-01-01', // Sample licenseExpiryDate
+  30, // Sample driverAge
+  rentalDays,
+  rentalSeason,
+  'Compact', // Sample carClass
+  pickupDate // Pass pickupDate to calculateRentalPrice
+);
+console.log('Rental Price:', rentalPrice); // Debugging
     let expectedPrice = '$' + (30 * rentalDays * (rentalSeason === "High" ? 1.15 : 1)).toFixed(2);
     // Adjust expected price for exactly one weekend rental
     if (rentalDays === 2 && rentalSeason === "High") {
