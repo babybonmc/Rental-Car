@@ -83,26 +83,6 @@ it('should maintain weekday price during holiday season', () => {
       const expectedPrice = '$' + (basePriceBeforeWeekendSurcharge * 1.05).toFixed(2);
       expect(rentalPrice).toEqual(expectedPrice);
     });
-  });
+  }); 
   
-  
-    // Test when rental duration spans the entire weekend
-    pickupDate = new Date(2024, 4, 11); // May 11, 2024 (Saturday)
-    dropoffDate = new Date(2024, 4, 12); // May 12, 2024 (Sunday)
-    rentalSeason = getRentalSeason(pickupDate, dropoffDate);
-    rentalDays = getRentalDays(pickupDate, dropoffDate);
-    rentalPrice = calculateRentalPrice(
-      '1990-01-01', // Sample licenseIssueDate
-      '1995-01-01', // Sample licenseExpiryDate
-      30, // Sample driverAge
-      rentalDays,
-      rentalSeason,
-      'Compact', // Sample carClass
-      pickupDate // Pass pickupDate to calculateRentalPrice
-    );
-    expectedPrice = '$' + (30 * rentalDays).toFixed(2);
-    expect(rentalPrice).toEqual(expectedPrice);
-  });
-  
-  // Добавьте еще тесты по вашему усмотрению для проверки других сценариев
 });
