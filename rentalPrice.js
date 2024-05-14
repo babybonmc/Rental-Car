@@ -1,44 +1,51 @@
 function calculateRentalPrice(
-    licenseIssueDate,
-    licenseExpiryDate,
-    driverAge,
-    rentalDays,
-    rentalSeason,
-    carClass
-  ) {
-    const licenseIssue = new Date(licenseIssueDate);
-    const licenseExpiry = new Date(licenseExpiryDate);
-    const licenseDurationInYears =
-      (licenseExpiry - licenseIssue) / (1000 * 60 * 60 * 24 * 365);
-  
-    if (licenseDurationInYears < 1) {
-      return "Individuals holding a driver's license for less than a year are ineligible to rent.";
-    }
-  
-    let rentalPrice = driverAge * rentalDays;
-  
-    if (licenseDurationInYears < 2) {
-      rentalPrice *= 1.3; // Increase price by 30%
-    }
-  
-    if (licenseDurationInYears < 3 && rentalSeason === "High") {
-      rentalPrice += 15 * rentalDays; // Add 15 euros to the daily rental price
-    }
-  
-    if (carClass === "Racer" && driverAge <= 25 && rentalSeason === "High") {
-      rentalPrice *= 1.5;
-    }
-  
-    if (rentalSeason === "High") {
-      rentalPrice *= 1.15;
-    }
-  
-    if (rentalDays > 10 && rentalSeason === "Low") {
-      rentalPrice *= 0.9;
-    }
-  
-    return "$" + rentalPrice;
+  licenseIssueDate,
+  licenseExpiryDate,
+  driverAge,
+  rentalDays,
+  rentalSeason,
+  carClass,
+  pickupDate // Добавляем pickupDate для определения дня недели
+) {
+  const licenseIssue = new Date(licenseIssueDate);
+  const licenseExpiry = new Date(licenseExpiryDate);
+  const licenseDurationInYears =
+    (licenseExpiry - licenseIssue) / (1000 * 60 * 60 * 24 * 365);
+
+  if (licenseDurationInYears < 1) {
+    return "Individuals holding a driver's license for less than a year are ineligible to rent.";
   }
+
+  let rentalPrice = driverAge * rentalDays;
+
+  if (licenseDurationInYears < 2) {
+    rentalPrice *= 1.3; // Increase price by 30%
+  }
+
+  if (licenseDurationInYears < 3 && rentalSeason === "High") {
+    rentalPrice += 15 * rentalDays; // Add 15 euros to the daily rental price
+  }
+
+  if (carClass === "Racer" && driverAge <= 25 && rentalSeason === "High") {
+    rentalPrice *= 1.5;
+  }
+
+  if (rentalSeason === "High") {
+    rentalPrice *= 1.15;
+  }
+
+  if (rentalDays > 10 && rentalSeason === "Low") {
+    rentalPrice *= 0.9;
+  }
+
+  // Увеличиваем цену на 5% в выходные дни
+  const pickupDay = new Date(pickupDate).getDay();
+  if (pickupDay === 0 || pickupDay === 6) { // 0 - Sunday, 6 - Saturday
+    rentalPrice *= 1.05;
+  }
+
+  return "$" + rentalPrice.toFixed(2); // Фиксируем до двух знаков после запятой
+}
   
   function getCarClass(carClass) {
     switch (carClass) {
