@@ -5,7 +5,7 @@ function calculateRentalPrice(
   rentalDays,
   rentalSeason,
   carClass,
-  pickupDate // Добавляем pickupDate для определения дня недели
+  pickupDate // Add pickupDate to determine the day of the week
 ) {
   const licenseIssue = new Date(licenseIssueDate);
   const licenseExpiry = new Date(licenseExpiryDate);
@@ -38,13 +38,13 @@ function calculateRentalPrice(
     rentalPrice *= 0.9;
   }
 
-  // Увеличиваем цену на 5% в выходные дни
+  // Increase the price by 5% on weekends
   const pickupDay = new Date(pickupDate).getDay();
   if (pickupDay === 0 || pickupDay === 6) { // 0 - Sunday, 6 - Saturday
     rentalPrice *= 1.05;
   }
 
-  return "$" + rentalPrice.toFixed(2); // Фиксируем до двух знаков после запятой
+  return "$" + rentalPrice.toFixed(2); // Fix up to two decimal places
 }
   
   function getCarClass(carClass) {
